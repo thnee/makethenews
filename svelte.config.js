@@ -1,7 +1,7 @@
 import path from "path";
 import { fileURLToPath } from "url";
 
-import adapter from "@sveltejs/adapter-auto";
+import adapter from "@sveltejs/adapter-static";
 
 import preprocess from "svelte-preprocess";
 
@@ -17,6 +17,12 @@ export default {
 	],
 
 	kit: {
-		adapter: adapter()
-	}
+		adapter: adapter({
+			pages: "build",
+			assets: "build",
+			fallback: "index.html",
+			precompress: true,
+			strict: true,
+		}),
+	},
 };
