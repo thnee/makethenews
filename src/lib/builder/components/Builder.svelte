@@ -1,12 +1,8 @@
 <script>
-	import { onDestroy } from "svelte";
-
-	import { builder } from "./builder";
-
-	import Field from "./Field.svelte";
+	import Field from "./Field/Field.svelte";
+	import Canvas from "./Canvas.svelte";
 
 	let fontsLoaded = false;
-	let canvasEl = null;
 
 	let fonts = [
 		"500 16px Archivo",
@@ -24,32 +20,12 @@
 	).then(() => {
 		fontsLoaded = true;
 	});
-
-	$: {
-		if (fontsLoaded && canvasEl) {
-			builder.initCanvas(canvasEl);
-		}
-	}
-
-	onDestroy(() => {
-		builder.destruct();
-	});
 </script>
 
 {#if fontsLoaded}
 	<div class="flex">
 		<div class="flex-none p-4" style="width: 500px;">
-			<div class="mb-4">
-				<div class="text-lg mb-1">Style</div>
-				{#each builder.styles as style}
-					<button
-						class="border rounded px-2 py-1 mr-2"
-						on:click={() => {builder.style.set(style);}}
-					>
-						{style.label}
-					</button>
-				{/each}
-			</div>
+			<Field name="style" />
 			<div class="flex gap-6 w-full">
 				<div class="flex-1">
 					<Field name="width" />
@@ -58,6 +34,8 @@
 					<Field name="height" />
 				</div>
 			</div>
+			<Field name="bgColor" />
+			<Field name="bgImage" />
 			<Field name="place" />
 			<Field name="time" />
 			<Field name="headline" />
@@ -66,7 +44,7 @@
 		</div>
 
 		<div class="p-4">
-			<canvas bind:this={canvasEl} />
+			<Canvas />
 		</div>
 	</div>
 {/if}

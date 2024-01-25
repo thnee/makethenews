@@ -1,43 +1,32 @@
-import { get, writable } from "svelte/store";
-
-import { fabric } from "fabric";
+import { derived } from "svelte/store";
 
 import { createFields } from "./createFields";
-import { renderCanvas, renderStyle } from "./render";
+import { renderCanvas, renderContent } from "./render";
 
 class Builder {
 	constructor() {
-		this.styles = [
-			{
-				name: "real",
-				label: "REAL NEWS",
-			},
-			{
-				name: "true",
-				label: "TRUE NEWS",
-			}
-		];
-
-		this.style = writable(this.styles[0]);
 		this.fields = createFields();
 	}
 
-	initCanvas(canvasEl) {
-		this.canvas = new fabric.Canvas();
-		this.canvasEl = null;
-		this.canvas.initialize(canvasEl);
+	initRender(canvas) {
+		this.canvas = canvas;
 
-		this.fields.width.value.subscribe(() => {
-			renderCanvas(this);
-		});
-		this.fields.height.value.subscribe(() => {
+		derived(
+			[
+				this.fields.width.value,
+				this.fields.height.value,
+				this.fields.bgImage.value,
+				this.fields.bgColor.value,
+			],
+			(x) => x
+		).subscribe(() => {
 			renderCanvas(this);
 		});
 
 		Object.values(this.fields).forEach((field) => {
-			field.createFabObj(this);
+			field.init(this);
 
-			if (get(field.visible)) {
+			if (field.fabObj) {
 				this.canvas.add(field.fabObj.group);
 
 				field.visible.subscribe((value) => {
@@ -47,13 +36,9 @@ class Builder {
 			}
 		});
 
-		this.style.subscribe((style) => {
-			renderStyle(builder, style);
+		this.fields.style.value.subscribe((style) => {
+			renderContent(builder, style);
 		});
-	}
-
-	destruct() {
-		this.canvas.dispose();
 	}
 }
 

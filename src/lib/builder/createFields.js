@@ -1,62 +1,96 @@
-import { TextField } from "./field";
+import { Field, StyleField, BackgroundImageField, TextField } from "./field";
 
 export function createFields() {
 	let fields = {};
 
-	fields.width = new TextField({
-		type: "number",
+	fields.width = new Field({
 		name: "width",
 		label: "Width",
+		fieldComp: "Size",
 		value: 1280,
 	});
 
-	fields.height = new TextField({
-		type: "number",
+	fields.height = new Field({
 		name: "height",
 		label: "Height",
+		fieldComp: "Size",
 		value: 720,
 	});
 
+	fields.bgColor = new Field({
+		name: "bgColor",
+		label: "Background color",
+		fieldComp: "Color",
+		value: "#113ed1",
+	});
+
+	fields.bgImage = new BackgroundImageField({
+		name: "bgImage",
+		label: "Background image",
+		fieldComp: "Image",
+		defaultValue: "/bg.jpg",
+		enableVisible: true,
+		visible: true,
+	});
+
+	fields.style = new StyleField({
+		name: "style",
+		label: "Style",
+		fieldComp: "Style",
+		value: "real",
+		options: [
+			{
+				name: "real",
+				label: "REAL NEWS",
+			},
+			{
+				name: "true",
+				label: "TRUE NEWS",
+			}
+		],
+	});
+
 	fields.place = new TextField({
-		type: "text",
 		name: "place",
 		label: "Place",
+		textType: "text",
 		value: "Some Place, Over There",
 		enableVisible: true,
 		visible: true,
 	});
 
 	fields.time = new TextField({
-		type: "text",
 		name: "time",
 		label: "Time",
+		fieldComp: "Text",
 		value: "20:31 PM, UTC",
 		enableVisible: true,
 		visible: true,
 	});
 
 	fields.headline = new TextField({
-		type: "text",
 		name: "headline",
 		label: "Headline",
+		fieldComp: "Text",
 		value: "BREAKING NEWS",
 		enableVisible: true,
 		visible: true,
 	});
 
 	fields.body = new TextField({
-		type: "textarea",
 		name: "body",
 		label: "Body",
+		fieldComp: "Text",
+		textComp: "textarea",
 		value: "INSIDE SOURCE: SOMETHING IS HAPPENING RIGHT NOW",
 		enableVisible: true,
 		visible: true,
 	});
 
 	fields.details = new TextField({
-		type: "text",
 		name: "details",
 		label: "Details",
+		fieldComp: "Text",
 		value: "",
 		enableVisible: true,
 		visible: true,

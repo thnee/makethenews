@@ -2,27 +2,20 @@ import { writable, get } from "svelte/store";
 
 import { fabric } from "fabric";
 
-export class Field {
-	constructor({
-		type = "text",
-		name,
-		label,
-		value,
-		visible = false,
-		enableVisible = false,
-	}) {
-		this.type = writable(type);
-		this.name = writable(name);
-		this.value = writable(value);
-		this.label = writable(label);
-		this.visible = writable(visible);
-		this.enableVisible = writable(enableVisible);
-	}
-}
+import { Field } from "./Field";
 
 export class TextField extends Field {
-	createFabObj(builder) {
-		this.builder = builder;
+	constructor({
+		textComp = "text",
+		...kwargs
+	}) {
+		kwargs.fieldComp = "Text";
+		super(kwargs);
+		this.textComp = writable(textComp);
+	}
+
+	init(builder) {
+		super.init(builder);
 
 		if (get(this.visible)) {
 			let text = new fabric.IText(get(this.value));
