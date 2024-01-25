@@ -1,4 +1,8 @@
 <script>
+	import { Icon } from "@steeze-ui/svelte-icon";
+	import { Download } from "@steeze-ui/lucide-icons";
+
+	import { builder } from "../builder";
 	import Field from "./Field/Field.svelte";
 	import Canvas from "./Canvas.svelte";
 
@@ -43,8 +47,25 @@
 			<Field name="details" />
 		</div>
 
-		<div class="p-4">
-			<Canvas />
+		<div class="flex flex-col">
+			<div class="p-4">
+				<Canvas />
+			</div>
+
+			<button
+				class="
+					w-56 h-12 mx-auto
+					border rounded-md
+					bg-neutral-700
+					border-neutral-600
+					hover:bg-neutral-600
+					flex items-center p-4 text-lg
+				"
+				on:click={() => {builder.downloadCanvas();}}
+			>
+				<Icon src={Download} class="w-6 h-6 mr-10" />
+				Download
+			</button>
 		</div>
 	</div>
 {/if}

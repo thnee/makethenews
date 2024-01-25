@@ -40,6 +40,16 @@ class Builder {
 			renderContent(builder, style);
 		});
 	}
+
+	downloadCanvas() {
+		let a = document.createElement("a");
+		a.download = "news.png";
+		a.href = this.canvas.toDataURL({
+			format: "png",
+		});
+		a.click();
+		a.remove();
+	}
 }
 
 export let builder = new Builder();
