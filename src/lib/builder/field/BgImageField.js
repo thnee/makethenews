@@ -4,20 +4,21 @@ import { Field } from "./Field";
 
 import { readFile } from "../utils";
 
-export class BackgroundImageField extends Field {
+export class BgImageField extends Field {
 	constructor({defaultValue, ...kwargs}) {
 		super(kwargs);
+
 		this.defaultValue = defaultValue;
-		this.files = writable();
+		this.file = writable();
 		this.src = null;
 	}
 
 	init(builder) {
 		super.init(builder);
 
-		this.files.subscribe(async (value) => {
+		this.file.subscribe(async (value) => {
 			if (value) {
-				this.src = await readFile(value[0]);
+				this.src = await readFile(value);
 				this.visible.set(true);
 			} else {
 				this.src = this.defaultValue;

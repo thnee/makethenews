@@ -1,15 +1,23 @@
 <script>
-	import { XSquare } from "@steeze-ui/lucide-icons";
+	import { X } from "@steeze-ui/lucide-icons";
 	import { Icon } from "@steeze-ui/svelte-icon";
 
 	export let field;
 
 	let name = field.name;
-	let files = field.files;
+	let file = field.file;
+	let files = [];
 	let el;
 
+	$: {
+		if (files.length > 0) {
+			$file = files[0];
+		}
+	}
+
 	function clear() {
-		$files = null;
+		$file = null;
+		files = [];
 		el.value = null;
 	}
 </script>
@@ -28,14 +36,15 @@
 		id={name}
 		name={name}
 		type="file"
+		accept="image/png, image/gif, image/jpeg"
 		class="block w-full"
 		bind:this={el}
-		bind:files={$files}
+		bind:files={files}
 	/>
 
 	<button
 		on:click={clear}
 	>
-		<Icon src={XSquare} class="w-6 h-6" />
+		<Icon src={X} class="w-6 h-6" />
 	</button>
 </div>

@@ -1,4 +1,4 @@
-import { Field, StyleField, BackgroundImageField, TextField } from "./field";
+import { Field, StyleField, BgImageField, TextField } from "./field";
 
 export function createFields() {
 	let fields = {};
@@ -24,7 +24,7 @@ export function createFields() {
 		value: "#113ed1",
 	});
 
-	fields.bgImage = new BackgroundImageField({
+	fields.bgImage = new BgImageField({
 		name: "bgImage",
 		label: "Background image",
 		fieldComp: "Image",
