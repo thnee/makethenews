@@ -1,4 +1,4 @@
-export { StyleField } from "./StyleField";
 export { Field } from "./Field";
-export { TextField } from "./TextField";
+export { StyleField } from "./StyleField";
 export { BackgroundImageField } from "./BackgroundImageField";
+export { TextField } from "./TextField";

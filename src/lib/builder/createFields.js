@@ -53,7 +53,7 @@ export function createFields() {
 	fields.place = new TextField({
 		name: "place",
 		label: "Place",
-		textType: "text",
+		fieldComp: "Text",
 		value: "Some Place, Over There",
 		enableVisible: true,
 		visible: true,

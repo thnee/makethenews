@@ -6,7 +6,6 @@ import { readFile } from "../utils";
 
 export class BackgroundImageField extends Field {
 	constructor({defaultValue, ...kwargs}) {
-		kwargs.fieldComp = "Image";
 		super(kwargs);
 		this.defaultValue = defaultValue;
 		this.files = writable();

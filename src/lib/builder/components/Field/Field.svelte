@@ -16,10 +16,10 @@
 		if (builder.fields) {
 			field = builder.fields[name];
 
-			fieldComp = builder.fields[name].fieldComp;
-			label = builder.fields[name].label;
-			visible = builder.fields[name].visible;
-			enableVisible = builder.fields[name].enableVisible;
+			fieldComp = field.fieldComp;
+			label = field.label;
+			visible = field.visible;
+			enableVisible = field.enableVisible;
 
 			comp = fieldComps[$fieldComp];
 		}

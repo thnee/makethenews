@@ -9,7 +9,6 @@ export class TextField extends Field {
 		textComp = "text",
 		...kwargs
 	}) {
-		kwargs.fieldComp = "Text";
 		super(kwargs);
 		this.textComp = writable(textComp);
 	}

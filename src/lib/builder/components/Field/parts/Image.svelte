@@ -1,7 +1,9 @@
 <script>
 	import { XSquare } from "@steeze-ui/lucide-icons";
 	import { Icon } from "@steeze-ui/svelte-icon";
+
 	export let field;
+
 	let name = field.name;
 	let files = field.files;
 	let el;
