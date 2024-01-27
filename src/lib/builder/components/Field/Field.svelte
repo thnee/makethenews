@@ -3,6 +3,7 @@
 
 	import Style from "./parts/Style.svelte";
 	import Size from "./parts/Size.svelte";
+	import Images from "./parts/Images.svelte";
 	import Color from "./parts/Color.svelte";
 	import Image from "./parts/Image.svelte";
 	import Text from "./parts/Text.svelte";
@@ -10,7 +11,7 @@
 	export let name;
 	let field, fieldComp, label, visible, enableVisible, comp;
 
-	let fieldComps = {Style, Size, Color, Image, Text};
+	let fieldComps = {Style, Size, Images, Color, Image, Text};
 
 	$: {
 		if (builder.fields) {

@@ -1,4 +1,4 @@
-import { Field, StyleField, BgImageField, TextField } from "./field";
+import { Field, StyleField, BgImageField, TextField, ImagesField } from "./field";
 
 export function createFields() {
 	let fields = {};
@@ -94,6 +94,14 @@ export function createFields() {
 		value: "",
 		enableVisible: true,
 		visible: true,
+	});
+
+	fields.images = new ImagesField({
+		name: "images",
+		label: "Images",
+		fieldComp: "Images",
+		value: "",
+		enableVisible: false,
 	});
 
 	return fields;

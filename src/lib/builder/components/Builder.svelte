@@ -40,6 +40,7 @@
 			</div>
 			<Field name="bgColor" />
 			<Field name="bgImage" />
+			<Field name="images" />
 			<Field name="place" />
 			<Field name="time" />
 			<Field name="headline" />
