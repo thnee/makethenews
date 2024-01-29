@@ -1,4 +1,7 @@
 <script>
+	import { Icon } from "@steeze-ui/svelte-icon";
+	import { Eye, EyeOff } from "@steeze-ui/lucide-icons";
+
 	import { builder } from "../../builder";
 
 	import Style from "./parts/Style.svelte";
@@ -27,34 +30,25 @@
 	}
 </script>
 
-<div class="flex flex-col mb-4">
-	<div class="flex items-center mb-1">
-		<label for={name} class="text-lg">
+<div class="flex flex-col mb-3">
+	<div class="flex items-center">
+		<label for={name} class="text-md mb-0.5">
 			{$label}
 		</label>
 		<div class="ml-auto flex">
 			{#if $enableVisible}
 				<label for={`${name}Enabled`} class="text-sm mr-2">
-					On:
+					<button
+						on:click={() => {$visible = !$visible;}}
+					>
+						<Icon src={$visible ? Eye : EyeOff} class="w-6 h-6" />
+					</button>
 				</label>
-				<input
-					id={`${name}Enabled`}
-					type="checkbox"
-					bind:checked={$visible}
-					class="
-						block
-						w-6 h-6
-						bg-neutral-700
-						border-neutral-600
-						border
-						rounded
-					"
-				/>
 			{/if}
 		</div>
 	</div>
 
-	<div class="text-lg">
+	<div>
 		{#if field}
 			<svelte:component this={comp} field={field} />
 		{/if}

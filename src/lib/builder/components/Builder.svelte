@@ -55,12 +55,11 @@
 
 			<button
 				class="
-					w-56 h-12 mx-auto
-					border rounded-md
-					bg-neutral-700
-					border-neutral-600
-					hover:bg-neutral-600
-					flex items-center p-4 text-lg
+					btn
+					w-56 h-12
+					mx-auto p-4
+					text-lg
+					flex items-center
 				"
 				on:click={() => {builder.downloadCanvas();}}
 			>

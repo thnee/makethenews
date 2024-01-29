@@ -7,13 +7,7 @@
 
 {#each $options as style}
 	<button
-		class="
-			px-2 py-1 mr-2
-			border rounded
-			bg-neutral-700
-			border-neutral-600
-			hover:bg-neutral-600
-		"
+		class="btn px-2 py-1 mr-2"
 		on:click={() => {value.set(style.name);}}
 	>
 		{style.label}

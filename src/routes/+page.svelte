@@ -5,7 +5,7 @@
 
 <Builder />
 
-<div class="text-xs flex flex-col gap-2 ml-4">
+<div class="text-xs flex flex-col gap-2 m-4">
 	<p>
 		This application does not store content that is created by users. Content that is created by users only exists on the user device and is discarded upon exit.
 	</p>

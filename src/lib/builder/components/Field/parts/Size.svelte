@@ -6,16 +6,8 @@
 </script>
 
 <input
-	id={name}
-	name={name}
-	type="number"
-	class="
-		block w-full
-		py-1 px-2
-		bg-neutral-700
-		border-neutral-600
-		border
-		rounded
-	"
+	id={$name}
+	type="text"
+	class="block w-full field py-1 px-2"
 	bind:value={$value}
 />
