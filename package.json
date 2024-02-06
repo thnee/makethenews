@@ -1,5 +1,6 @@
 {
 	"name": "a",
+	"type": "module",
 	"devDependencies": {
 		"@fontsource/archivo": "^5.0.16",
 		"@fontsource/archivo-black": "^5.0.18",
@@ -23,6 +24,5 @@
 		"tailwindcss": "^3.4.1",
 		"unplugin-fonts": "^1.1.1",
 		"vite": "^5.0.12"
-	},
-	"type": "module"
+	}
 }
