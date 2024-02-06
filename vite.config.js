@@ -10,7 +10,7 @@ export default defineConfig({
 				families: [
 					{
 						name: "Archivo",
-						weights: [400, 500, 600, 700],
+						weights: [100, 200, 300, 400, 500, 600, 700, 800, 900],
 						styles: ["italic", "normal"],
 					},
 					{
