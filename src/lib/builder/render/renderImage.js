@@ -1,6 +1,7 @@
 import { fabric } from "fabric";
+import { asyncReadFileAsDataUrl, asyncReadFileAsText } from "../utils";
 
-export async function renderImage(canvas, src) {
+export async function renderImage(canvas, file, withBorder) {
 	let borderSize = 4;
 	let borderColor = "#a2a8ba";
 
@@ -46,27 +47,51 @@ export async function renderImage(canvas, src) {
 		return bg;
 	}
 
-	function createGroup(bg, img) {
-		let group = new fabric.Group([bg, img]);
-		group.left = canvas.width / 2;
-		group.top = canvas.height / 2;
-		group.originX = "center";
-		group.originY = "center";
-		group.setCoords({
-			width: group.width,
-			hright: group.height,
+	function positionInCenter(object) {
+		object.left = canvas.width / 2;
+		object.top = canvas.height / 2;
+		object.originX = "center";
+		object.originY = "center";
+		object.setCoords({
+			width: object.width,
+			hright: object.height,
 		});
-		return group;
 	}
 
-	return new Promise((resolve) => {
-		fabric.Image.fromURL(src, (img) => {
-			setImageSize(img);
+	function addImage(img) {
+		setImageSize(img);
+		let object;
+		if (withBorder) {
 			let bg = createBg(img);
-			let group = createGroup(bg, img);
+			let group = new fabric.Group([bg, img]);
 			canvas.add(group);
-			canvas.requestRenderAll();
-			resolve(group);
+			object = group;
+		} else {
+			canvas.add(img);
+			object = img;
+		}
+		positionInCenter(object);
+		return object;
+	}
+
+	if (file.type == "image/svg+xml") {
+		let data = await asyncReadFileAsText(file);
+		return new Promise((resolve) => {
+			fabric.loadSVGFromString(data, function(objects, options) {
+				var img = fabric.util.groupSVGElements(objects, options);
+				let object = addImage(img);
+				resolve(object);
+			});
 		});
-	});
+	}
+
+	if (["image/png", "image/jpeg", "image/gif"].includes(file.type)) {
+		let data = await asyncReadFileAsDataUrl(file);
+		return new Promise((resolve) => {
+			fabric.Image.fromURL(data, (img) => {
+				let object = addImage(img);
+				resolve(object);
+			});
+		});
+	}
 }

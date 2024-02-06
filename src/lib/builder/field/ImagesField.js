@@ -2,7 +2,6 @@ import { writable, get } from "svelte/store";
 
 import { Field } from "./Field";
 
-import { readFile } from "../utils";
 import { renderImage } from "../render";
 
 export class ImagesField extends Field {
@@ -10,22 +9,22 @@ export class ImagesField extends Field {
 		super(kwargs);
 
 		this.files = writable([]);
+		this.withBorder = writable(true);
 	}
 
 	addFiles(files) {
 		Array.from(files).forEach(async (file) => {
-			let src = await readFile(file);
-			let img = await renderImage(this.builder.canvas, src);
+			let object = await renderImage(this.builder.canvas, file, get(this.withBorder));
 			this.files.set([...get(this.files), {
 				file: file,
-				img: img,
+				object: object,
 			}]);
 		});
 	}
 
 	removeFile(index) {
 		let file = get(this.files)[index];
-		this.builder.canvas.remove(file.img);
+		this.builder.canvas.remove(file.object);
 		this.files.set(get(this.files).filter((_, _index) => {
 			return _index != index;
 		}));

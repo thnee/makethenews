@@ -2,7 +2,7 @@ import { writable, get } from "svelte/store";
 
 import { Field } from "./Field";
 
-import { readFile } from "../utils";
+import { asyncReadFileAsDataUrl } from "../utils";
 
 export class BgImageField extends Field {
 	constructor({defaultValue, ...kwargs}) {
@@ -18,7 +18,7 @@ export class BgImageField extends Field {
 
 		this.file.subscribe(async (value) => {
 			if (value) {
-				this.src = await readFile(value);
+				this.src = await asyncReadFileAsDataUrl(value);
 				this.visible.set(true);
 			} else {
 				this.src = this.defaultValue;

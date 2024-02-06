@@ -34,4 +34,8 @@ body {
 		@apply border-fieldBorder;
 		@apply text-fieldFg;
 	}
+
+	.checkbox {
+		@apply bg-buttonBg
+	}
 }
