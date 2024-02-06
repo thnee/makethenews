@@ -31,21 +31,20 @@
 </script>
 
 <div class="flex flex-col mb-3">
-	<div class="flex items-center">
-		<label for={name} class="text-md mb-0.5">
+	<div class="flex items-end mb-0.5">
+		<label for={name} class="text-md pl-2">
 			{$label}
 		</label>
-		<div class="ml-auto flex">
-			{#if $enableVisible}
-				<label for={`${name}Enabled`} class="text-sm mr-2">
-					<button
-						on:click={() => {$visible = !$visible;}}
-					>
-						<Icon src={$visible ? Eye : EyeOff} class="w-6 h-6" />
-					</button>
-				</label>
-			{/if}
-		</div>
+		{#if $enableVisible}
+			<div class="ml-auto pr-1">
+				<button
+					class="btn size-8 flex items-center justify-center"
+					on:click={() => {$visible = !$visible;}}
+				>
+					<Icon src={$visible ? Eye : EyeOff} class="size-6" />
+				</button>
+			</div>
+		{/if}
 	</div>
 
 	<div>
