@@ -2,23 +2,19 @@
 	import { Icon } from "@steeze-ui/svelte-icon";
 	import { X, Plus } from "@steeze-ui/lucide-icons";
 
-	export let field;
+	let { field } = $props();
 
-	let withBorder = field.withBorder;
-	let files = field.files;
-	let inputFiles = [];
-	let fileInput;
+	let input = $state();
 
-	$: {
-		if (inputFiles.length > 0) {
-			field.addFiles(inputFiles);
-			inputFiles = [];
-			fileInput.value = null;
+	function onInput() {
+		for (let file of Array.from(input.files)) {
+			field.onAddFile(file);
 		}
+		input.files = undefined;
 	}
 
-	function removeFile(index) {
-		field.removeFile(index);
+	function onRemove(index) {
+		field.onRemoveFile(index);
 	}
 </script>
 
@@ -26,7 +22,7 @@
 	<div class="flex items-center p-1 gap-2">
 		<button
 			class="btn flex items-center justify-center gap-2 h-8 px-4"
-			on:click={() => {fileInput.click();}}
+			on:click={() => {input.click();}}
 		>
 			Add
 			<Icon src={Plus} class="size-4" />
@@ -35,7 +31,7 @@
 			id="withBorder"
 			type="checkbox"
 			class="checkbox"
-			bind:checked={$withBorder}
+			bind:checked={field.withBorder}
 		/>
 		<label for="withBorder">with border</label>
 	</div>
@@ -45,25 +41,25 @@
 		accept="image/png, image/gif, image/jpeg, image/svg+xml"
 		multiple
 		class="hidden"
-		bind:this={fileInput}
-		bind:files={inputFiles}
+		bind:this={input}
+		on:input={onInput}
 	/>
 
-	{#if $files.length > 0}
-		<div class="mt-2">
-			{#each $files as file, index}
+	{#if field.value.length > 0}
+		<div class="mt-1">
+			{#each field.value as { file }, index}
 				<div class="
 					p-1 pl-2
 					border-b border-dotted last:border-0 border-neutral-400
 					flex items-center
 				">
 					<div class="w-full overflow-hidden text-ellipsis text-sm">
-						{file.file.name}
+						{file.name}
 					</div>
 					<div class="flex-none">
 						<button
 							class="btn size-8 flex items-center justify-center"
-							on:click={() => {removeFile(index);}}
+							on:click={() => {onRemove(index);}}
 						>
 							<Icon src={X} class="size-6" />
 						</button>

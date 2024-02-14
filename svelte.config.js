@@ -2,7 +2,6 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 import adapter from "@sveltejs/adapter-static";
-
 import preprocess from "svelte-preprocess";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));

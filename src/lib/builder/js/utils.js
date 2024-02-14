@@ -23,3 +23,11 @@ export async function asyncReadFileAsText(file) {
 		reader.readAsText(file);
 	});
 }
+
+export function isFile(value) {
+	return value instanceof File;
+}
+
+export function isString(value) {
+	return typeof(value) == "string" || value instanceof String;
+}

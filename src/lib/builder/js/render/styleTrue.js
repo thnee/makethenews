@@ -1,18 +1,12 @@
-import { renderTextBox } from "./renderTextBox";
+import fields from "../fields.svelte";
 
-export function renderRealNews(builder) {
-	let place = builder.fields.place;
-	let time = builder.fields.time;
-	let headline = builder.fields.headline;
-	let body = builder.fields.body;
-	let details = builder.fields.details;
-
+export function renderStyleTrue() {
 	let white = "#ffffff";
 	let black = "#000000";
-	let gray = "#f3f3f3";
-	let red =  "#ba261c";
+	let gray = "#eeeeee";
+	let red = "#a81208";
 
-	renderTextBox(place, {
+	fields.place.textOptions = {
 		top: 40, left: 40,
 		height: "auto", width: "auto",
 		paddingX: 16,
@@ -21,31 +15,31 @@ export function renderRealNews(builder) {
 		fontWeight: 500,
 		bgColor: gray,
 		textColor: black,
-	});
+	};
 
-	renderTextBox(time, {
+	fields.time.textOptions = {
 		top: 66, left: 40,
 		height: "auto", width: "auto",
 		paddingX: 16,
 		paddingY: 2,
 		fontSize: 18,
 		fontWeight: 500,
-		bgColor: black,
+		bgColor: red,
 		textColor: white,
-	});
+	};
 
-	renderTextBox(headline, {
+	fields.headline.textOptions = {
 		top: 574, left: 40,
 		height: "auto", width: "auto",
 		paddingX: 15,
 		paddingY: 2,
 		fontSize: 24,
 		fontWeight: 600,
-		textColor: gray,
 		bgColor: red,
-	});
+		textColor: white,
+	};
 
-	renderTextBox(body, {
+	fields.body.textOptions = {
 		top: 606, left: 40,
 		height: "auto", width: 1200,
 		paddingX: 15,
@@ -54,18 +48,20 @@ export function renderRealNews(builder) {
 		fontSize: 32,
 		charSpacing: -30,
 		fontWeight: 600,
+		textAlign: "center",
 		bgColor: gray,
 		textColor: black,
-	});
+	};
 
-	renderTextBox(details, {
+	fields.details.textOptions = {
 		top: 680, left: 40,
 		height: "auto", width: 1200,
 		paddingX: 15,
 		paddingY: 2,
 		fontSize: 20,
-		fontWeight: 100,
-		bgColor: black,
+		fontWeight: 600,
+		textAlign: "center",
+		bgColor: red,
 		textColor: white,
-	});
+	};
 }

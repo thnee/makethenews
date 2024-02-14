@@ -1,7 +1,32 @@
 import { fabric } from "fabric";
+import { canvas } from "../../components/Builder.svelte";
 import { asyncReadFileAsDataUrl, asyncReadFileAsText } from "../utils";
+import fields from "../fields.svelte";
 
-export async function renderImage(canvas, file, withBorder) {
+export function addImage(file) {
+	renderImage({
+		file: file,
+		withBorder: fields.images.withBorder,
+	}).then((object) => {
+		fields.images.value.push({
+			file: file,
+			object: object,
+		});
+	});
+}
+
+export function removeImage(index) {
+	let image = fields.images.value[index];
+	canvas.remove(image.object);
+	fields.images.value = fields.images.value.filter((_, _index) => {
+		return _index != index;
+	});
+}
+
+async function renderImage({
+	file = null,
+	withBorder = false,
+}) {
 	let borderSize = 4;
 	let borderColor = "#a2a8ba";
 
@@ -74,7 +99,7 @@ export async function renderImage(canvas, file, withBorder) {
 		return object;
 	}
 
-	if (file.type == "image/svg+xml") {
+	if (file && file.type == "image/svg+xml") {
 		let data = await asyncReadFileAsText(file);
 		return new Promise((resolve) => {
 			fabric.loadSVGFromString(data, function(objects, options) {
@@ -85,7 +110,7 @@ export async function renderImage(canvas, file, withBorder) {
 		});
 	}
 
-	if (["image/png", "image/jpeg", "image/gif"].includes(file.type)) {
+	if (file && ["image/png", "image/jpeg", "image/gif"].includes(file.type)) {
 		let data = await asyncReadFileAsDataUrl(file);
 		return new Promise((resolve) => {
 			fabric.Image.fromURL(data, (img) => {
