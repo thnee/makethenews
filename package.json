@@ -2,6 +2,7 @@
 	"name": "makethenews",
 	"license": "MIT",
 	"type": "module",
+	"packageManager": "yarn@4.1.1",
 	"devDependencies": {
 		"@fontsource/archivo": "^5.0.17",
 		"@fontsource/archivo-black": "^5.0.19",
