@@ -1,5 +1,6 @@
 {
-	"name": "a",
+	"name": "makethenews",
+	"license": "MIT",
 	"type": "module",
 	"devDependencies": {
 		"@fontsource/archivo": "^5.0.16",
