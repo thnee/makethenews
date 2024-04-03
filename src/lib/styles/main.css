@@ -6,6 +6,12 @@ body {
 	font-family: "Archivo";
 }
 
+@layer base {
+	.no-transition * {
+		transition: none !important;
+	}
+}
+
 @layer components {
 	.btn {
 		@apply transition-all duration-300 ease-in-out;

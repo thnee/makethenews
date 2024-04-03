@@ -14,6 +14,11 @@
 	import "@fontsource/archivo-narrow/500.css";
 	import "@fontsource/archivo-narrow/600.css";
 	import "@fontsource/archivo-narrow/700.css";
+	import { onMount } from "svelte";
+
+	onMount(() => {
+		document.body.classList.remove("no-transition");
+	});
 </script>
 
 <slot />
