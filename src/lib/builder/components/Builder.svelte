@@ -64,7 +64,7 @@
 
 	<div class="flex flex-col">
 		<div class="p-4">
-			<canvas bind:this={canvasEl} />
+			<canvas bind:this={canvasEl} width="1280" height="720" />
 		</div>
 		<div class="pl-8">
 			<Download />
