@@ -3,30 +3,21 @@ import { canvas } from "../../components/Builder.svelte";
 import { asyncReadFileAsDataUrl, asyncReadFileAsText } from "../utils";
 import fields from "../fields.svelte";
 
-export function addImage(file) {
-	renderImage({
-		file: file,
-		withBorder: fields.images.withBorder,
-	}).then((object) => {
-		fields.images.value.push({
-			file: file,
-			object: object,
-		});
-	});
+export async function addImage(file, options) {
+	if (options.withBorder === undefined) {
+		options.withBorder = fields.images.withBorder;
+	}
+	let object = await renderImage(file, options);
+	fields.images.value.push({file, object});
 }
 
 export function removeImage(index) {
 	let image = fields.images.value[index];
 	canvas.remove(image.object);
-	fields.images.value = fields.images.value.filter((_, _index) => {
-		return _index != index;
-	});
+	fields.images.value.splice(index, 1);
 }
 
-async function renderImage({
-	file = null,
-	withBorder = false,
-}) {
+async function renderImage(file, options) {
 	let borderSize = 4;
 	let borderColor = "#a2a8ba";
 
@@ -72,21 +63,32 @@ async function renderImage({
 		return bg;
 	}
 
-	function positionInCenter(object) {
-		object.left = canvas.width / 2;
-		object.top = canvas.height / 2;
-		object.originX = "center";
-		object.originY = "center";
+	function positionObject(object) {
+		// If position is given, use that position.
+		if (options.position) {
+			object.left = options.position.left;
+			object.top = options.position.top;
+			object.originX = "left";
+			object.originY = "top";
+
+		// If no position is given, position it in center.
+		} else {
+			object.left = canvas.width / 2;
+			object.top = canvas.height / 2;
+			object.originX = "center";
+			object.originY = "center";
+		}
+
 		object.setCoords({
 			width: object.width,
-			hright: object.height,
+			height: object.height,
 		});
 	}
 
 	function addImage(img) {
 		setImageSize(img);
 		let object;
-		if (withBorder) {
+		if (options.withBorder) {
 			let bg = createBg(img);
 			let group = new fabric.Group([bg, img]);
 			canvas.add(group);
@@ -95,28 +97,52 @@ async function renderImage({
 			canvas.add(img);
 			object = img;
 		}
-		positionInCenter(object);
+		positionObject(object);
 		return object;
 	}
 
-	if (file && file.type == "image/svg+xml") {
-		let data = await asyncReadFileAsText(file);
-		return new Promise((resolve) => {
-			fabric.loadSVGFromString(data, function(objects, options) {
-				var img = fabric.util.groupSVGElements(objects, options);
-				let object = addImage(img);
-				resolve(object);
+	if (file.src) {
+		let extension = file.src.split(".").pop();
+		if (["svg"].includes(extension)) {
+			return new Promise((resolve) => {
+				fabric.loadSVGFromURL(file.src, function(objects, options) {
+					var img = fabric.util.groupSVGElements(objects, options);
+					let object = addImage(img);
+					resolve(object);
+				});
 			});
-		});
+		}
+
+		if (["jpg"].includes(extension)) {
+			return new Promise((resolve) => {
+				fabric.Image.fromURL(file.src, (img) => {
+					let object = addImage(img);
+					resolve(object);
+				});
+			});
+		}
 	}
 
-	if (file && ["image/png", "image/jpeg", "image/gif"].includes(file.type)) {
-		let data = await asyncReadFileAsDataUrl(file);
-		return new Promise((resolve) => {
-			fabric.Image.fromURL(data, (img) => {
-				let object = addImage(img);
-				resolve(object);
+	if (file instanceof File) {
+		if (["image/svg+xml"].includes(file.type)) {
+			let data = await asyncReadFileAsText(file);
+			return new Promise((resolve) => {
+				fabric.loadSVGFromString(data, function(objects, options) {
+					var img = fabric.util.groupSVGElements(objects, options);
+					let object = addImage(img);
+					resolve(object);
+				});
 			});
-		});
+		}
+
+		if (["image/png", "image/jpeg", "image/gif"].includes(file.type)) {
+			let data = await asyncReadFileAsDataUrl(file);
+			return new Promise((resolve) => {
+				fabric.Image.fromURL(data, (img) => {
+					let object = addImage(img);
+					resolve(object);
+				});
+			});
+		}
 	}
 }

@@ -7,7 +7,7 @@
 
 	function onInput() {
 		for (let file of Array.from(input.files)) {
-			field.onAddFile(file);
+			field.onAddFile(file, {});
 		}
 		input.files = undefined;
 	}
@@ -46,14 +46,14 @@
 
 	{#if field.value.length > 0}
 		<div class="mt-1">
-			{#each field.value as { file }, index}
+			{#each field.value as image, index}
 				<div class="
 					p-1 pl-2
 					border-b border-dotted last:border-0 border-neutral-400
 					flex items-center
 				">
 					<div class="w-full overflow-hidden text-ellipsis text-sm">
-						{file.name}
+						{image.file.name}
 					</div>
 					<div class="flex-none">
 						<button

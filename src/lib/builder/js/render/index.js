@@ -2,5 +2,6 @@ export { renderWidth, renderHeight, renderBgColor, renderBgImage } from "./canva
 export { renderStyle } from "./style";
 export { renderStyleReal } from "./styleReal";
 export { renderStyleTrue } from "./styleTrue";
+export { renderStyleGood } from "./styleGood";
 export { createTextBox, renderTextBox, renderTextBoxStyle } from "./textBox";
 export { addImage, removeImage } from "./images";

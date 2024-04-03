@@ -66,4 +66,6 @@ export function renderStyleTrue() {
 		bgColor: red,
 		textColor: white,
 	};
+
+	fields.images.styleImages = [];
 }

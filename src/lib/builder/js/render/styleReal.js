@@ -62,4 +62,6 @@ export function renderStyleReal() {
 		bgColor: black,
 		textColor: white,
 	};
+
+	fields.images.styleImages = [];
 }

@@ -1,4 +1,7 @@
-import { createTextBox, renderTextBox, renderTextBoxStyle } from "./render";
+import {
+	createTextBox, renderTextBox, renderTextBoxStyle,
+	addImage, removeImage,
+} from "./render";
 
 export function createField(props) {
 	let field = {...props};
@@ -29,11 +32,43 @@ export function createTextField(props) {
 
 	let field = createField(props);
 
-	field.isStyled = true;
-
 	field.onInit = () => { createTextBox(field); };
 	field.onStyle = () => { renderTextBoxStyle(field); };
 	field.onInput = () => { renderTextBox(field); };
+
+	return field;
+}
+
+export function createImagesField(props) {
+	props.component = props.component || "Images";
+	props.startValue = [];
+
+	let field = createField(props);
+
+	field.images = [];
+	field.enableVisible = false;
+	field.withBorder = true;
+
+	field.onAddFile = addImage;
+	field.onRemoveFile = removeImage;
+
+	field.styleImages = [];
+
+	field.onBeforeStyle = () => {
+		for (let image of field.styleImages || []) {
+			for (const [index, valueImage] of field.value.entries()) {
+				if (valueImage.file.src && valueImage.file.src == image.src) {
+					removeImage(index);
+				}
+			}
+		}
+	};
+
+	field.onStyle = async () => {
+		for (let image of field.styleImages || []) {
+			await addImage(image, image.options);
+		}
+	};
 
 	return field;
 }

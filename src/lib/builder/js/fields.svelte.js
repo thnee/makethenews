@@ -1,9 +1,8 @@
-import { createField, createTextField } from "./field";
+import { createField, createTextField, createImagesField } from "./field";
 import {
 	renderStyle,
-	renderStyleReal, renderStyleTrue,
+	renderStyleReal, renderStyleTrue, renderStyleGood,
 	renderWidth, renderHeight, renderBgColor, renderBgImage,
-	addImage, removeImage,
 } from "./render";
 
 let fields = $state({});
@@ -24,6 +23,11 @@ fields.style = createField({
 			label: "TRUE NEWS",
 			renderer: renderStyleTrue,
 		},
+		{
+			value: "good",
+			label: "GOOD NEWS",
+			renderer: renderStyleGood,
+		}
 	],
 	onInit: renderStyle,
 	onInput: renderStyle,
@@ -64,15 +68,8 @@ fields.bgImage = createField({
 	onInput: renderBgImage,
 });
 
-fields.images = createField({
+fields.images = createImagesField({
 	name: "Images",
-	component: "Images",
-	images: [],
-	startValue: [],
-	enableVisible: false,
-	withBorder: true,
-	onAddFile: addImage,
-	onRemoveFile: removeImage,
 });
 
 fields.place = createTextField({
