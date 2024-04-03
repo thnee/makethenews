@@ -1,6 +1,5 @@
 <script>
-	import { Icon } from "@steeze-ui/svelte-icon";
-	import { Eye, EyeOff } from "@steeze-ui/lucide-icons";
+	import { Eye, EyeOff } from "lucide-svelte";
 
 	import Color from "./fields/Color.svelte";
 	import Image from "./fields/Image.svelte";
@@ -31,7 +30,11 @@
 					class="btn size-8 flex items-center justify-center"
 					on:click={onVisibleChange}
 				>
-					<Icon src={field.visible ? Eye : EyeOff} class="size-6" />
+					{#if field.visible}
+						<Eye />
+					{:else}
+						<EyeOff />
+					{/if}
 				</button>
 			</div>
 		{/if}

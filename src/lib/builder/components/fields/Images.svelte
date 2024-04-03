@@ -1,6 +1,5 @@
 <script>
-	import { Icon } from "@steeze-ui/svelte-icon";
-	import { X, Plus } from "@steeze-ui/lucide-icons";
+	import { X, Plus } from "lucide-svelte";
 
 	let { field } = $props();
 
@@ -25,7 +24,7 @@
 			on:click={() => {input.click();}}
 		>
 			Add
-			<Icon src={Plus} class="size-4" />
+			<Plus size="20" />
 		</button>
 		<input
 			id="withBorder"
@@ -61,7 +60,7 @@
 							class="btn size-8 flex items-center justify-center"
 							on:click={() => {onRemove(index);}}
 						>
-							<Icon src={X} class="size-6" />
+							<X />
 						</button>
 					</div>
 				</div>

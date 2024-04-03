@@ -1,6 +1,5 @@
 <script>
-	import { Icon } from "@steeze-ui/svelte-icon";
-	import { X, FileImage } from "@steeze-ui/lucide-icons";
+	import { X, FileImage } from "lucide-svelte";
 	import { isFile, isString } from "$lib/builder/js/utils";
 
 	let { field } = $props();
@@ -25,7 +24,7 @@
 		on:click={() => {input.click();}}
 	>
 		Select
-		<Icon src={FileImage} class="size-4" />
+		<FileImage size="16" />
 	</button>
 
 	<div class="flex items-center w-full">
@@ -44,7 +43,7 @@
 					class="btn size-8 flex items-center justify-center"
 					on:click={onRemove}
 				>
-					<Icon src={X} class="size-6" />
+					<X />
 				</button>
 			</div>
 		{/if}

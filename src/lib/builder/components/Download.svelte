@@ -1,6 +1,6 @@
 <script>
-	import { Icon } from "@steeze-ui/svelte-icon";
-	import { Download } from "@steeze-ui/lucide-icons";
+	import { Download } from "lucide-svelte";
+
 	import { canvas } from "./Builder.svelte";
 
 	function downloadCanvas() {
@@ -24,6 +24,6 @@
 	"
 	on:click={() => {downloadCanvas();}}
 >
-	<Icon src={Download} class="w-6 h-6 mr-10" />
+	<Download class="mr-10" />
 	Download
 </button>
