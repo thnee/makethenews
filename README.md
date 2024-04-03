@@ -22,11 +22,8 @@ mise install
 
 Install requirements.
 
-The `--force` flag is required since some packages don't officially support Svelte 5.  
-This can be removed when Svelte 5 is released and supported.
-
 ```bash
-npm i --force
+npm i
 ```
 
 Run dev server.
