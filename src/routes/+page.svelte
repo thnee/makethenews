@@ -1,5 +1,4 @@
 <script>
-	import "unfonts.css";
 	import Builder from "$lib/builder/components/Builder.svelte";
 </script>
 
