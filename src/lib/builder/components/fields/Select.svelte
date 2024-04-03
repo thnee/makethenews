@@ -1,5 +1,5 @@
 <script>
-	let { field } = $props();
+	let { field = $bindable() } = $props();
 
 	function onSelect(option) {
 		field.value = option.value;

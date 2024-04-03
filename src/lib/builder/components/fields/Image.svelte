@@ -2,7 +2,7 @@
 	import { X, FileImage } from "lucide-svelte";
 	import { isFile, isString } from "$lib/builder/js/utils";
 
-	let { field } = $props();
+	let { field = $bindable() } = $props();
 
 	let input = $state();
 

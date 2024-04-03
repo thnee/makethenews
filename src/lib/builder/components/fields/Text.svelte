@@ -1,5 +1,5 @@
 <script>
-	let { field } = $props();
+	let { field = $bindable() } = $props();
 </script>
 
 <input

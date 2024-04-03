@@ -1,7 +1,7 @@
 <script>
 	import { X, Plus } from "lucide-svelte";
 
-	let { field } = $props();
+	let { field = $bindable() } = $props();
 
 	let input = $state();
 

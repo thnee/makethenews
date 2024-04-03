@@ -8,7 +8,7 @@
 	import Text from "./fields/Text.svelte";
 	import Textarea from "./fields/Textarea.svelte";
 
-	let { field } = $props();
+	let { field = $bindable() } = $props();
 
 	let components = {Color, Image, Images, Select, Text, Textarea};
 	let component = components[field.component];
