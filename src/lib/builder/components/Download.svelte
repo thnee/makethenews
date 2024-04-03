@@ -1,7 +1,7 @@
 <script>
 	import { Icon } from "@steeze-ui/svelte-icon";
 	import { Download } from "@steeze-ui/lucide-icons";
-  import { canvas } from "./Builder.svelte";
+	import { canvas } from "./Builder.svelte";
 
 	function downloadCanvas() {
 		let a = document.createElement("a");

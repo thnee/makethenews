@@ -1,16 +1,16 @@
 default: dev
 
 dev:
-  npx vite dev
+	npx vite dev
 
 build:
-  npx vite build
+	npx vite build
 
 preview:
-  npx vite preview
+	npx vite preview
 
 lint:
-  npx eslint .
+	npx eslint .
 
 fmt:
-  npx eslint --fix .
+	npx eslint --fix .
