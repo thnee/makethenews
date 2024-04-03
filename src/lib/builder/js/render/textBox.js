@@ -68,6 +68,7 @@ export function renderTextBoxColor(field) {
 	});
 	bg.set({
 		fill: options.bgColor,
+		stroke: options.borderColor || null,
 	});
 }
 
@@ -94,6 +95,7 @@ export function renderTextBoxSize(field) {
 		left: 0,
 		originX: "center",
 		originY: "center",
+		strokeWidth: options.borderWidth || 0,
 	});
 
 	function roundToEven(number) {

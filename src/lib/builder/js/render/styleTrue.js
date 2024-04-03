@@ -29,7 +29,7 @@ export function renderStyleTrue() {
 	};
 
 	fields.headline.textOptions = {
-		top: 574, left: 40,
+		top: 573, left: 41,
 		height: "auto", width: "auto",
 		paddingX: 15,
 		paddingY: 2,
@@ -37,6 +37,8 @@ export function renderStyleTrue() {
 		fontWeight: 600,
 		bgColor: red,
 		textColor: white,
+		borderWidth: 2,
+		borderColor: gray,
 	};
 
 	fields.body.textOptions = {
