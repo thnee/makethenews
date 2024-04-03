@@ -4,6 +4,8 @@
 </script>
 
 <script>
+	import { browser } from "$app/environment";
+
 	import Field from "./Field.svelte";
 	import Download from "./Download.svelte";
 
@@ -14,9 +16,11 @@
 	let canvasEl = $state();
 	let inited = $state(false);
 
-	loadFonts().then(() => {
-		fontsLoaded = true;
-	});
+	if (browser) {
+		loadFonts().then(() => {
+			fontsLoaded = true;
+		});
+	}
 
 	$effect(() => {
 		if (!fontsLoaded || !canvasEl || inited) {
