@@ -4,6 +4,12 @@
 
 <Builder />
 
+<svelte:head>
+	<title>Make the News!</title>
+	<meta name="description" content="Make the News!">
+	<meta name="keywords" content="make the news, breaking news, news generator, content generator, news headlines, news creator, news maker">
+</svelte:head>
+
 <div class="text-xs flex flex-col gap-2 m-4">
 	<p>
 		This application does not store content that is created by users. Content that is created by users only exists on the user device and is discarded upon exit.
